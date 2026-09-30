@@ -5,6 +5,7 @@
   const CURRENCY = 'R';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const light = document.documentElement.dataset.theme === 'light';
   const $ = (s, c) => (c || document).querySelector(s);
   const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -378,9 +379,13 @@
     g.fillStyle = gr; g.fillRect(0, 0, size, size);
     return s;
   }
-  const steamSprite = sprite(128, [[0, 'rgba(255,245,235,.55)'], [0.4, 'rgba(255,240,225,.18)'], [1, 'rgba(255,240,225,0)']]);
+  const steamSprite = light
+    ? sprite(128, [[0, 'rgba(150,135,125,.2)'], [0.4, 'rgba(160,145,135,.07)'], [1, 'rgba(160,145,135,0)']])
+    : sprite(128, [[0, 'rgba(255,245,235,.55)'], [0.4, 'rgba(255,240,225,.18)'], [1, 'rgba(255,240,225,0)']]);
   const sparkSprite = sprite(32, [[0, 'rgba(255,240,200,1)'], [0.25, 'rgba(255,170,60,.9)'], [1, 'rgba(255,90,20,0)']]);
-  const bokehSprite = sprite(64, [[0, 'rgba(255,150,60,.5)'], [0.6, 'rgba(255,110,40,.12)'], [1, 'rgba(255,90,20,0)']]);
+  const bokehSprite = light
+    ? sprite(64, [[0, 'rgba(225,20,29,.16)'], [0.6, 'rgba(225,20,29,.05)'], [1, 'rgba(225,20,29,0)']])
+    : sprite(64, [[0, 'rgba(255,150,60,.5)'], [0.6, 'rgba(255,110,40,.12)'], [1, 'rgba(255,90,20,0)']]);
 
   const steamC = $('#steam'), sparkC = $('#sparks'), bokehC = $('#bokeh');
   let S = fitCanvas(steamC), K = fitCanvas(sparkC), B = fitCanvas(bokehC);
@@ -411,7 +416,7 @@
       const n = 2 + (Math.random() * 4) | 0;
       for (let j = 0; j < n; j++) sparks.push({ x: K.w * (0.5 + side * (0.29 + Math.random() * 0.04)), y: K.h * (0.6 + Math.random() * 0.06), vx: side * (0.6 + Math.random() * 1.6), vy: -(1.2 + Math.random() * 2.4), life: 0, max: 40 + Math.random() * 40, s: 3 + Math.random() * 6 });
     }
-    kc.globalCompositeOperation = 'lighter';
+    kc.globalCompositeOperation = light ? 'source-over' : 'lighter';
     for (let i = sparks.length - 1; i >= 0; i--) {
       const p = sparks[i];
       p.life += dt; p.vy += 0.07 * dt; p.x += p.vx * dt; p.y += p.vy * dt;

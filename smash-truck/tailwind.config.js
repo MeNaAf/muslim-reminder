@@ -3,7 +3,10 @@ module.exports = {
   content: ['./index.html', './js/**/*.js'],
   theme: {
     extend: {
-      colors: { ink: '#0a0908', coal: '#141210', ember: '#ff5a1f', melt: '#ffb321', cream: '#f4ead8', smoke: '#8d857b' },
+      colors: {
+        ink: 'rgb(var(--c-ink) / <alpha-value>)', ember: 'rgb(var(--c-ember) / <alpha-value>)', melt: 'rgb(var(--c-melt) / <alpha-value>)',
+        cream: 'rgb(var(--c-cream) / <alpha-value>)', smoke: 'rgb(var(--c-smoke) / <alpha-value>)', line: 'rgb(var(--c-line) / <alpha-value>)'
+      },
       fontFamily: { display: ['Anton', 'Impact', 'sans-serif'], sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'] }
     }
   }

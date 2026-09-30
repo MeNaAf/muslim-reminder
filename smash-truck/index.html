@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SMASH TRUCK — Smashed to Order</title>
   <meta name="description" content="SMASH TRUCK. Thin, crispy-edged, cheese-drenched smash burgers off a matte-black food truck. Smashed to order.">
-  <meta name="theme-color" content="#0a0908">
+  <meta name="theme-color" content="#fbf8f4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -69,7 +69,7 @@
   <div id="loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-ink">
     <div class="font-display text-[12vw] md:text-8xl tracking-tight leading-none loader-logo">SMASH<span class="text-ember">.</span></div>
     <div class="mt-6 font-mono text-xs tracking-[.3em] text-smoke uppercase">Heating the flat top · <span id="loaderTemp" class="text-melt">20</span>°C</div>
-    <div class="mt-4 h-px w-56 bg-white/10 overflow-hidden"><div id="loaderBar" class="h-full w-0 bg-ember"></div></div>
+    <div class="mt-4 h-px w-56 bg-line/10 overflow-hidden"><div id="loaderBar" class="h-full w-0 bg-ember"></div></div>
   </div>
 
   <div class="grain" aria-hidden="true"></div>
@@ -115,7 +115,7 @@
             <a href="#lineup" class="btn-primary magnetic" data-cursor="Eat"><span>See the lineup</span><i>→</i></a>
             <a href="#find" class="btn-ghost magnetic" data-cursor="Go"><span>Find the truck</span></a>
           </div>
-          <dl class="reveal mt-12 grid grid-cols-3 gap-6 max-w-md border-t border-white/10 pt-6">
+          <dl class="reveal mt-12 grid grid-cols-3 gap-6 max-w-md border-t border-line/10 pt-6">
             <div><dt class="stat-k">Flat top</dt><dd class="stat-v"><span data-count="250">0</span>°C</dd></div>
             <div><dt class="stat-k">On the grill</dt><dd class="stat-v"><span data-count="90">0</span>s</dd></div>
             <div><dt class="stat-k">Frozen patties</dt><dd class="stat-v"><span data-count="0">0</span></dd></div>
@@ -174,7 +174,7 @@
 
         <div class="absolute bottom-8 inset-x-0 z-20 flex flex-col items-center gap-3 pointer-events-none">
           <div class="font-mono text-[10px] tracking-[.3em] uppercase text-smoke" id="anatomyHint">Scroll to deconstruct</div>
-          <div class="w-48 h-px bg-white/10"><div id="anatomyBar" class="h-full bg-melt origin-left" style="transform:scaleX(0)"></div></div>
+          <div class="w-48 h-px bg-line/10"><div id="anatomyBar" class="h-full bg-melt origin-left" style="transform:scaleX(0)"></div></div>
         </div>
       </div>
     </section>
@@ -268,7 +268,7 @@
           <p class="eyebrow reveal">05 — Find the truck</p>
           <h2 class="reveal font-display uppercase leading-[.86] text-[16vw] sm:text-8xl mt-4">Follow<br>the <span class="neon-word" id="neonWord">glow</span><span class="text-ember">.</span></h2>
           <p class="reveal mt-6 text-cream/65 max-w-md text-lg">We park, we fire up, and we sell out. When the shutter comes down, the smashing is done for the night.</p>
-          <ul class="reveal mt-9 divide-y divide-white/10 border-y border-white/10 font-mono text-sm" id="stops"></ul>
+          <ul class="reveal mt-9 divide-y divide-line/10 border-y border-line/10 font-mono text-sm" id="stops"></ul>
           <div class="reveal mt-9 flex flex-wrap gap-4">
             <a href="#stops" class="btn-primary magnetic" id="findBtn" data-cursor="Go"><span>Find the truck</span><i>→</i></a>
             <a href="#lineup" class="btn-ghost magnetic" data-cursor="Eat"><span>Order now</span></a>
@@ -278,7 +278,7 @@
     </section>
   </main>
 
-  <footer class="relative border-t border-white/10">
+  <footer class="relative border-t border-line/10">
     <div class="mx-auto max-w-[1400px] px-5 md:px-10 py-10 flex flex-col md:flex-row gap-6 justify-between items-center font-mono text-[11px] tracking-[.2em] uppercase text-smoke">
       <div class="font-display text-cream text-xl tracking-wide normal-case">SMASH TRUCK</div>
       <div>Smashed to order · Cash &amp; card · Beef ground daily</div>
