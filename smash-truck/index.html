@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMASH TRUCK — Smashed to Order</title>
+  <meta name="description" content="SMASH TRUCK. Thin, crispy-edged, cheese-drenched smash burgers off a matte-black food truck. Smashed to order.">
+  <meta name="theme-color" content="#0a0908">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-ink text-cream font-sans antialiased">
+
+  <!-- Shared SVG paint: gradients + filters used by every burger layer -->
+  <svg id="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="gBunTop" cx=".38" cy=".22" r=".9">
+        <stop offset="0" stop-color="#ffd690"/><stop offset=".2" stop-color="#f2ac56"/>
+        <stop offset=".52" stop-color="#d27b2b"/><stop offset=".82" stop-color="#9c4c16"/><stop offset="1" stop-color="#6a300c"/>
+      </radialGradient>
+      <radialGradient id="gBunTopDark" cx=".38" cy=".22" r=".9">
+        <stop offset="0" stop-color="#6a655f"/><stop offset=".25" stop-color="#34302d"/>
+        <stop offset=".75" stop-color="#161413"/><stop offset="1" stop-color="#070707"/>
+      </radialGradient>
+      <linearGradient id="gBunBot" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#efb462"/><stop offset=".45" stop-color="#c97727"/><stop offset="1" stop-color="#733710"/>
+      </linearGradient>
+      <linearGradient id="gBunBotDark" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#4a4541"/><stop offset=".5" stop-color="#1e1c1a"/><stop offset="1" stop-color="#080808"/>
+      </linearGradient>
+      <linearGradient id="gToast" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eab05e"/><stop offset="1" stop-color="#a8581b"/></linearGradient>
+      <linearGradient id="gToastDark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b3632"/><stop offset="1" stop-color="#151311"/></linearGradient>
+      <linearGradient id="gLace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b56a2c"/><stop offset=".5" stop-color="#7d3d14"/><stop offset="1" stop-color="#3c1806"/></linearGradient>
+      <radialGradient id="gPattyTop" cx=".5" cy=".4" r=".7">
+        <stop offset="0" stop-color="#94501f"/><stop offset=".55" stop-color="#633013"/><stop offset="1" stop-color="#351709"/>
+      </radialGradient>
+      <linearGradient id="gPattySide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55280f"/><stop offset="1" stop-color="#170903"/></linearGradient>
+      <linearGradient id="gCheese" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffd650"/><stop offset=".35" stop-color="#ffb522"/><stop offset="1" stop-color="#ec8508"/>
+      </linearGradient>
+      <linearGradient id="gSauce" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8a86a"/><stop offset="1" stop-color="#d45a28"/></linearGradient>
+      <radialGradient id="gPickle"><stop offset="0" stop-color="#b8cd62"/><stop offset=".7" stop-color="#7f9d31"/><stop offset="1" stop-color="#4f6c19"/></radialGradient>
+      <linearGradient id="gSeed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff8e2"/><stop offset="1" stop-color="#e2c68e"/></linearGradient>
+      <linearGradient id="gFry" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c77a22"/><stop offset=".12" stop-color="#ffd978"/><stop offset="1" stop-color="#eaa93c"/></linearGradient>
+      <linearGradient id="gShake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf0de"/><stop offset="1" stop-color="#dcb88c"/></linearGradient>
+
+      <filter id="fSear" x="-5%" y="-20%" width="110%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency=".85 .32" numOctaves="3" seed="4" result="n"/>
+        <feColorMatrix in="n" type="matrix" values="0 0 0 0 .08  0 0 0 0 .03  0 0 0 0 .01  2.6 0 0 0 -1.25" result="dark"/>
+        <feComposite in="dark" in2="SourceGraphic" operator="in" result="speck"/>
+        <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 .78  0 0 0 0 .45  0 2.2 0 0 -1.55" result="lite"/>
+        <feComposite in="lite" in2="SourceGraphic" operator="in" result="glow"/>
+        <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="speck"/><feMergeNode in="glow"/></feMerge>
+      </filter>
+      <filter id="fBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+      <filter id="fSoft" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="1.4"/></filter>
+      <filter id="fNeon" x="-30%" y="-80%" width="160%" height="260%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="b1"/>
+        <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b2"/>
+        <feMerge><feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Preloader -->
+  <div id="loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-ink">
+    <div class="font-display text-[12vw] md:text-8xl tracking-tight leading-none loader-logo">SMASH<span class="text-ember">.</span></div>
+    <div class="mt-6 font-mono text-xs tracking-[.3em] text-smoke uppercase">Heating the flat top · <span id="loaderTemp" class="text-melt">20</span>°C</div>
+    <div class="mt-4 h-px w-56 bg-white/10 overflow-hidden"><div id="loaderBar" class="h-full w-0 bg-ember"></div></div>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div id="cursor" aria-hidden="true"><div class="cursor-dot"></div><div class="cursor-ring"><span class="cursor-label"></span></div></div>
+  <div id="heat" aria-hidden="true"><div id="heatFill"></div></div>
+
+  <!-- Nav -->
+  <header id="nav" class="fixed top-0 inset-x-0 z-50">
+    <div class="mx-auto max-w-[1400px] px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
+      <a href="#top" class="font-display text-2xl tracking-wide flex items-center gap-2 whitespace-nowrap" data-cursor="Top">
+        <span class="logo-dot"></span>SMASH TRUCK
+      </a>
+      <nav class="hidden md:flex items-center gap-9 font-mono text-[11px] uppercase tracking-[.22em] text-cream/70">
+        <a href="#anatomy" class="nav-link">Anatomy</a>
+        <a href="#truck" class="nav-link">The Truck</a>
+        <a href="#lineup" class="nav-link">Lineup</a>
+        <a href="#find" class="nav-link">Find Us</a>
+      </nav>
+      <a href="#find" class="btn-pill magnetic" data-cursor="Go"><span class="live-dot"></span>Open tonight</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- 1 · HERO -->
+    <section id="hero" class="relative min-h-[100svh] overflow-hidden flex items-center">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-spot"></div>
+        <canvas id="bokeh"></canvas>
+      </div>
+      <div class="hero-word font-display" aria-hidden="true">SMASH</div>
+
+      <div class="relative z-10 mx-auto max-w-[1400px] w-full px-5 md:px-10 grid lg:grid-cols-12 gap-8 items-center pt-24 pb-16">
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <p class="eyebrow reveal">Est. on the flat top · Street burgers</p>
+          <h1 class="font-display uppercase leading-[.86] tracking-tight text-[18vw] sm:text-[13vw] lg:text-[8.2vw] xl:text-[132px] mt-4">
+            <span class="split block">Smashed</span>
+            <span class="split block text-outline">to order<span class="text-ember">.</span></span>
+          </h1>
+          <p class="reveal mt-7 max-w-md text-cream/70 text-lg leading-relaxed">
+            Beef balls hit a 250°C flat top and get pressed thin until the edges turn to crispy lace. American cheese melts over them, the soft bun goes on, and it's in your hands inside 90 seconds. From the truck, not a kitchen.
+          </p>
+          <div class="reveal mt-9 flex flex-wrap gap-4">
+            <a href="#lineup" class="btn-primary magnetic" data-cursor="Eat"><span>See the lineup</span><i>→</i></a>
+            <a href="#find" class="btn-ghost magnetic" data-cursor="Go"><span>Find the truck</span></a>
+          </div>
+          <dl class="reveal mt-12 grid grid-cols-3 gap-6 max-w-md border-t border-white/10 pt-6">
+            <div><dt class="stat-k">Flat top</dt><dd class="stat-v"><span data-count="250">0</span>°C</dd></div>
+            <div><dt class="stat-k">On the grill</dt><dd class="stat-v"><span data-count="90">0</span>s</dd></div>
+            <div><dt class="stat-k">Frozen patties</dt><dd class="stat-v"><span data-count="0">0</span></dd></div>
+          </dl>
+        </div>
+
+        <div class="lg:col-span-7 order-1 lg:order-2 relative flex justify-center">
+          <div id="heroStage" class="hero-stage">
+            <canvas id="steam" aria-hidden="true"></canvas>
+            <div class="hero-float">
+              <div id="heroTilt" class="hero-tilt">
+                <div id="heroBurger" role="img" aria-label="A double smash burger with melted American cheese, crispy lace edges, pickles and a sesame bun"></div>
+              </div>
+            </div>
+            <div class="hero-shadow"></div>
+            <canvas id="sparks" aria-hidden="true"></canvas>
+            <div class="hero-tag tag-a"><b>Crispy lace</b><span>edges pressed to glass</span></div>
+            <div class="hero-tag tag-b"><b>Double American</b><span>melted under the dome</span></div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#anatomy" class="scroll-cue" aria-label="Scroll to anatomy"><span>Scroll</span><i></i></a>
+    </section>
+
+    <!-- Ticker -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track" id="ticker">
+        <span>Smashed to order</span><b>✦</b><span>Crispy lace</span><b>✦</b><span>Double American</span><b>✦</b><span>Potato bun</span><b>✦</b><span>Smash sauce</span><b>✦</b><span>No reservations</span><b>✦</b>
+        <span>Smashed to order</span><b>✦</b><span>Crispy lace</span><b>✦</b><span>Double American</span><b>✦</b><span>Potato bun</span><b>✦</b><span>Smash sauce</span><b>✦</b><span>No reservations</span><b>✦</b>
+      </div>
+    </div>
+
+    <!-- 2 · ANATOMY / EXPLODED -->
+    <section id="anatomy" class="relative" style="height:420vh">
+      <div class="sticky top-0 h-[100svh] overflow-hidden">
+        <div class="anatomy-bg" aria-hidden="true"></div>
+        <div class="absolute inset-x-0 top-20 md:top-24 z-20 mx-auto max-w-[1400px] px-5 md:px-10 flex items-start justify-between pointer-events-none">
+          <div>
+            <p class="eyebrow">02 — Anatomy</p>
+            <h2 class="font-display uppercase text-5xl md:text-7xl leading-[.9] mt-3">Built for<br>the smash<span class="text-ember">.</span></h2>
+          </div>
+          <div class="text-right hidden md:block">
+            <div class="font-mono text-[11px] tracking-[.25em] uppercase text-smoke">Layer</div>
+            <div class="font-display text-7xl leading-none mt-1"><span id="layerNum">01</span><span class="text-cream/20">/09</span></div>
+            <div id="layerName" class="font-mono text-xs tracking-[.2em] uppercase text-melt mt-2">Toasted heel</div>
+          </div>
+        </div>
+
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div id="anatomyStage" class="anatomy-stage">
+            <div id="anatomyTilt" class="anatomy-tilt"><div id="anatomyBurger"></div></div>
+            <div id="anatomyLabels" class="anatomy-labels"></div>
+          </div>
+        </div>
+
+        <div class="absolute bottom-8 inset-x-0 z-20 flex flex-col items-center gap-3 pointer-events-none">
+          <div class="font-mono text-[10px] tracking-[.3em] uppercase text-smoke" id="anatomyHint">Scroll to deconstruct</div>
+          <div class="w-48 h-px bg-white/10"><div id="anatomyBar" class="h-full bg-melt origin-left" style="transform:scaleX(0)"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · FROM THE TRUCK (horizontal) -->
+    <section id="truck" class="relative" style="height:520vh">
+      <div class="sticky top-0 h-[100svh] overflow-hidden">
+        <div class="absolute inset-x-0 top-20 md:top-24 z-30 mx-auto max-w-[1400px] px-5 md:px-10 flex justify-between items-center pointer-events-none">
+          <div>
+            <h2 class="eyebrow">03 — From the truck · handed over still hot</h2>
+          </div>
+          <div class="hidden md:flex gap-2 font-mono text-[10px] tracking-[.25em] uppercase" id="truckSteps">
+            <span class="step is-on">The wrap</span><span class="step">The tray</span><span class="step">The truck</span>
+          </div>
+        </div>
+
+        <div id="hTrack" class="h-track">
+          <!-- Panel: wrap -->
+          <div class="h-panel">
+            <div class="panel-copy">
+              <div class="font-mono text-melt text-xs tracking-[.3em] uppercase">01 · The wrap</div>
+              <h3 class="font-display uppercase text-5xl md:text-7xl leading-[.9] mt-3">Black paper.<br>Gold inside.</h3>
+              <p class="mt-5 text-cream/65 max-w-sm">Waxed matte-black paper holds the heat and catches the drip, and you unfold it right at the window. Keep scrolling to open it.</p>
+            </div>
+            <div class="wrap-scene tiltable" data-cursor="Open">
+              <div class="wrap-stage" id="wrapStage">
+                <div class="wrap-glow"></div>
+                <div class="wrap-burger"><div id="wrapBurger"></div></div>
+                <div class="wrap-flap left"><div class="face front"><span class="stamp">SMASH<br>TRUCK</span></div><div class="face back"></div></div>
+                <div class="wrap-flap right"><div class="face front"></div><div class="face back"></div></div>
+                <div class="wrap-pocket"><span class="pocket-logo">SMASH TRUCK</span><span class="pocket-sub">smashed to order · no. 0427</span></div>
+                <div class="wrap-shadow"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel: tray -->
+          <div class="h-panel">
+            <div class="panel-copy">
+              <div class="font-mono text-melt text-xs tracking-[.3em] uppercase">02 · The tray</div>
+              <h3 class="font-display uppercase text-5xl md:text-7xl leading-[.9] mt-3">The full<br>order.</h3>
+              <p class="mt-5 text-cream/65 max-w-sm">Burger, double-fried shoestrings and a burnt-vanilla shake that holds a straw upright. Hover over each one.</p>
+            </div>
+            <div class="tray-scene" id="trayScene">
+              <div class="tray">
+                <div class="tray-paper"><span>SMASH TRUCK · SMASH TRUCK · SMASH TRUCK · SMASH TRUCK · SMASH TRUCK · SMASH TRUCK</span></div>
+              </div>
+              <div class="tray-item item-fries" data-cursor="Fries"><div id="friesArt"></div><div class="item-tag"><b>Shoestring fries</b>Double-fried, smash salt · R39</div></div>
+              <div class="tray-item item-burger" data-cursor="Burger"><div id="trayBurger"></div><div class="item-tag"><b>Double Lace</b>Two patties, twice the crust · R119</div></div>
+              <div class="tray-item item-shake" data-cursor="Shake"><div id="shakeArt"></div><div class="item-tag"><b>Burnt vanilla shake</b>Thick enough to stand a straw · R55</div></div>
+            </div>
+          </div>
+
+          <!-- Panel: truck -->
+          <div class="h-panel panel-truck">
+            <div class="city" aria-hidden="true"><div class="city-far"></div><div class="city-near"></div></div>
+            <div class="panel-copy">
+              <div class="font-mono text-melt text-xs tracking-[.3em] uppercase">03 · The truck</div>
+              <h3 class="font-display uppercase text-5xl md:text-7xl leading-[.9] mt-3">Matte black.<br>Neon on.</h3>
+              <p class="mt-5 text-cream/65 max-w-sm">One flat top, two smashers and a queue down the block. Hover over the window to see who's cooking.</p>
+            </div>
+            <div class="truck-wrap" id="truckWrap" data-cursor="Order">
+              <div class="truck-smoke" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+              <div id="truckArt"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · LINEUP -->
+    <section id="lineup" class="relative py-28 md:py-40">
+      <div class="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 md:mb-20">
+          <div>
+            <p class="eyebrow reveal">04 — The lineup</p>
+            <h2 class="reveal font-display uppercase text-6xl md:text-8xl leading-[.88] mt-3">Five burgers.<br><span class="text-outline">No filler.</span></h2>
+          </div>
+          <p class="reveal max-w-sm text-cream/60">Every burger is smashed when you order it, never before. Hover over a card to see the layers, then add it to your bag and collect it at the window.</p>
+        </div>
+        <div id="cards" class="grid gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-6"></div>
+      </div>
+    </section>
+
+    <!-- 5 · CTA -->
+    <section id="find" class="relative min-h-[100svh] overflow-hidden flex items-center">
+      <div class="cta-bg" aria-hidden="true"></div>
+      <div class="relative z-10 mx-auto max-w-[1400px] w-full px-5 md:px-10 py-28 grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7 order-2 lg:order-1 cta-truck" id="ctaTruck"></div>
+        <div class="lg:col-span-5 order-1 lg:order-2">
+          <p class="eyebrow reveal">05 — Find the truck</p>
+          <h2 class="reveal font-display uppercase leading-[.86] text-[16vw] sm:text-8xl mt-4">Follow<br>the <span class="neon-word" id="neonWord">glow</span><span class="text-ember">.</span></h2>
+          <p class="reveal mt-6 text-cream/65 max-w-md text-lg">We park, we fire up, and we sell out. When the shutter comes down, the smashing is done for the night.</p>
+          <ul class="reveal mt-9 divide-y divide-white/10 border-y border-white/10 font-mono text-sm" id="stops"></ul>
+          <div class="reveal mt-9 flex flex-wrap gap-4">
+            <a href="#stops" class="btn-primary magnetic" id="findBtn" data-cursor="Go"><span>Find the truck</span><i>→</i></a>
+            <a href="#lineup" class="btn-ghost magnetic" data-cursor="Eat"><span>Order now</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="relative border-t border-white/10">
+    <div class="mx-auto max-w-[1400px] px-5 md:px-10 py-10 flex flex-col md:flex-row gap-6 justify-between items-center font-mono text-[11px] tracking-[.2em] uppercase text-smoke">
+      <div class="font-display text-cream text-xl tracking-wide normal-case">SMASH TRUCK</div>
+      <div>Smashed to order · Cash &amp; card · Beef ground daily</div>
+      <div>© <span id="year"></span> Smash Truck</div>
+    </div>
+    <div class="footer-mega font-display" aria-hidden="true">SMASHED</div>
+  </footer>
+
+  <!-- Bag -->
+  <button id="bag" class="bag" aria-live="polite" data-cursor="Bag">
+    <span class="bag-icon">▣</span><span id="bagCount">0</span><span class="bag-sep"></span><span id="bagTotal">R0</span><span class="bag-cta">Collect at the window →</span>
+  </button>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="js/burger.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
